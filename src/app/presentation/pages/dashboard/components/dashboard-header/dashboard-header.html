@@ -1,0 +1,26 @@
+<header class="flex items-center justify-between">
+    <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#a3ff33] to-[#4ade80] p-0.5">
+            <div class="w-full h-full rounded-full bg-[#050505] flex items-center justify-center overflow-hidden">
+                <div class="w-6 h-6 bg-[#a3ff33]"
+                    style="-webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;"
+                    [style.-webkit-mask-image]="'url(' + icons().user + ')'"
+                    [style.mask-image]="'url(' + icons().user + ')'">
+                </div>
+            </div>
+        </div>
+        <div>
+            <p class="text-xs text-gray-500">{{ greeting() }}</p>
+            <h2 class="text-lg font-bold">{{ userName() }}</h2>
+        </div>
+    </div>
+    <div class="flex items-center gap-2">
+        <button class="p-3 bg-[#121212] rounded-full border border-white/5 relative">
+            <div class="w-5 h-5 bg-gray-400"
+                style="-webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;"
+                [style.-webkit-mask-image]="'url(' + icons().bell + ')'" [style.mask-image]="'url(' + icons().bell + ')'">
+            </div>
+            <span class="absolute top-2 right-2 w-2 h-2 bg-[#a3ff33] rounded-full border border-[#050505]"></span>
+        </button>
+    </div>
+</header>

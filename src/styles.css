@@ -1,3 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+/* ==========================================================================
+   ANIMACIONES DE NAVEGACIÓN (View Transitions / Animate API)
+   ========================================================================== */
+.framer-enter {
+    animation: scaleFadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.framer-leave {
+    animation: scaleFadeOut 200ms ease-in forwards;
+}
+
+@keyframes scaleFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* Animación específica para los detalles de la tarjeta (Igual a Framer Motion y:10) */
+.details-enter {
+    animation: detailsSlideUp 350ms cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+}
+
+@keyframes detailsSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+        /* Equivalente a y: 15 */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,13 @@
+<div animate.enter="framer-enter" animate.leave="framer-leave" class="px-5 pt-6 flex flex-col gap-8">
+
+    <app-dashboard-header [userName]="ui.userName" [greeting]="ui.greeting" [icons]="iconsHeader()" />
+
+    <app-balance-card [balance]="state.totalBalance()" [incomeIcon]="iconsActivity().income" [label]="ui.balanceLabel"
+        [growth]="ui.growthBadge" [depositLabel]="ui.depositBtn">
+    </app-balance-card>
+
+    <app-recent-activity [transactions]="state.transactions()" [title]="ui.recentActivityTitle"
+        [viewAllLabel]="ui.viewAllBtn" [emptyMessage]="ui.emptyStateMsg" [iconsActivity]="iconsActivity()">
+    </app-recent-activity>
+
+</div>

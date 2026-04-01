@@ -1,0 +1,39 @@
+<div animate.enter="framer-enter" animate.leave="framer-leave" class="px-5 pt-6 flex flex-col gap-8">
+
+    <app-cards-header (onAddClick)="openAddCard()" />
+
+    <app-cards-carousel [cards]="cards()" (onCardChange)="activeCardIndex.set($event)" />
+
+    <!-- <div class="text-center text-xs text-gray-500">
+        ID Tarjeta Activa: {{ cards()[activeCardIndex()]?.id }}
+    </div> -->
+
+    <div class="px-5 pb-24">
+
+        @for (card of activeCardAsArray(); track card.id) {
+
+        <div animate.enter="details-enter">
+
+            <app-card-details [card]="card" [consumedAmount]="0" (onArchive)="handleArchive($event)"
+                (onConfigure)="handleConfigure($event)" />
+
+        </div>
+
+        } @empty {
+        <div class="text-center p-8 border border-dashed border-white/10 rounded-3xl">
+            <p class="text-gray-500 text-sm">No tienes tarjetas registradas.</p>
+        </div>
+        }
+
+    </div>
+
+</div>
+
+@if (isAddingCard()) {
+<app-card-sheet [isOpen]="isAddingCard()" (onClose)="closeAddCard()" (onSave)="handleSaveCard($event)">
+</app-card-sheet>
+}
+
+<app-confirm-modal [isOpen]="cardToArchiveId() !== null" title="¿Eliminar tarjeta?"
+    subtitle="Esta acción no se puede deshacer. Se borrarán todos los datos asociados." (onCancel)="cancelArchiveCard()"
+    (onConfirm)="confirmArchiveCard()" />

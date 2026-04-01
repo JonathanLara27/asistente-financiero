@@ -1,0 +1,28 @@
+<section class="relative w-full overflow-hidden pb-6">
+
+    <div #scrollContainer class="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar w-full items-center"
+        style="padding-left: calc(50% - 150px); padding-right: calc(50% - 150px);" (scroll)="onScroll($event)">
+
+        @for (card of cards(); track card.id; let i = $index) {
+
+        <div class="flex-shrink-0 w-[300px] snap-center transition-all duration-500 cursor-pointer"
+            (click)="selectCard(i)" [ngClass]="{ 
+                 'scale-100 opacity-100 drop-shadow-2xl': i === activeIndex(), 
+                 'scale-90 opacity-40 grayscale-[30%]': i !== activeIndex() 
+               }">
+
+            <app-credit-card [card]="card" />
+
+        </div>
+
+        }
+    </div>
+
+    <div class="flex justify-center gap-1.5 mt-6">
+        @for (card of cards(); track card.id; let i = $index) {
+        <div (click)="selectCard(i)" class="h-1 rounded-full transition-all duration-300 cursor-pointer"
+            [ngClass]="i === activeIndex() ? 'w-6 bg-[#a3ff33]' : 'w-2 bg-white/20 hover:bg-white/40'">
+        </div>
+        }
+    </div>
+</section>

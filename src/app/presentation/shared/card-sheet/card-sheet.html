@@ -1,0 +1,66 @@
+<div class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+    [class.opacity-0]="!isOpen()" [class.pointer-events-none]="!isOpen()" (click)="closeSheet()">
+</div>
+
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto md:max-w-full z-[70] bg-[#121212] rounded-t-[40px] border-t border-white/10 px-8 pb-10 pt-4 transition-transform duration-300 ease-out shadow-2xl"
+    [class.translate-y-full]="!isOpen()" [class.translate-y-0]="isOpen()">
+
+    <div class="w-full flex justify-center pb-6" (click)="closeSheet()">
+        <div class="w-12 h-1.5 bg-white/10 rounded-full cursor-pointer"></div>
+    </div>
+
+    <h3 class="text-xl font-bold mb-6">{{ ui.title }}</h3>
+
+    <form (submit)="handleSubmit($event)" class="space-y-6">
+
+        <div class="space-y-1 relative">
+            <label class="text-[10px] uppercase text-gray-500 font-bold ml-1">{{ ui.lastFourLabel }}</label>
+            <input type="text" [placeholder]="ui.lastFourPlaceholder" [formField]="cardForm.lastFour"
+                class="w-full bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-[#a3ff33]/50 transition-colors">
+            <app-form-field-error [form]="cardForm" field="lastFour" />
+        </div>
+
+        <div class="space-y-1 relative">
+            <label class="text-[10px] uppercase text-gray-500 font-bold ml-1">{{ ui.limitLabel }}</label>
+            <input type="number" [placeholder]="ui.limitPlaceholder" [formField]="cardForm.limit"
+                class="w-full bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-[#a3ff33]/50 transition-colors">
+            <app-form-field-error [form]="cardForm" field="limit" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1 relative">
+                <label class="text-[10px] uppercase text-gray-500 font-bold ml-1">{{ ui.closingDayLabel }}</label>
+                <input type="number" [placeholder]="ui.closingDayPlaceholder"
+                    [formField]="cardForm.closingDay"
+                    class="w-full bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-[#a3ff33]/50 transition-colors">
+                <app-form-field-error [form]="cardForm" field="closingDay" />
+            </div>
+
+            <div class="space-y-1 relative">
+                <label class="text-[10px] uppercase text-gray-500 font-bold ml-1">{{ ui.paymentDayLabel }}</label>
+                <input type="number" [placeholder]="ui.paymentDayPlaceholder"
+                    [formField]="cardForm.paymentDay"
+                    class="w-full bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-[#a3ff33]/50 transition-colors">
+                <app-form-field-error [form]="cardForm" field="paymentDay" />
+            </div>
+        </div>
+
+        <div class="flex gap-4">
+            <button type="button" (click)="setType('visa')"
+                [class]="type() === 'visa' ? 'bg-[#a3ff33]/10 border-[#a3ff33] text-[#a3ff33]' : 'bg-[#1a1a1a] border-white/5 text-gray-500'"
+                class="flex-1 p-4 rounded-2xl border transition-all font-medium">
+                VISA
+            </button>
+            <button type="button" (click)="setType('mastercard')"
+                [class]="type() === 'mastercard' ? 'bg-[#a3ff33]/10 border-[#a3ff33] text-[#a3ff33]' : 'bg-[#1a1a1a] border-white/5 text-gray-500'"
+                class="flex-1 p-4 rounded-2xl border transition-all font-medium">
+                Mastercard
+            </button>
+        </div>
+
+        <button type="submit" [disabled]="cardForm().invalid()"
+            class="w-full bg-[#a3ff33] text-black font-bold p-4 rounded-2xl shadow-[0_0_20px_rgba(163,255,51,0.3)] hover:bg-opacity-90 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ ui.submitBtn }}
+        </button>
+    </form>
+</div>

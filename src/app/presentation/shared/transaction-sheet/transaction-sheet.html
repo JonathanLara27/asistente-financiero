@@ -1,0 +1,60 @@
+<div class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+    [class.opacity-0]="!isOpen()" [class.pointer-events-none]="!isOpen()" (click)="closeSheet()">
+</div>
+
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto md:max-w-full z-[70] bg-[#121212] rounded-t-[32px] border-t border-white/10 transition-transform duration-300 ease-out"
+    [class.translate-y-full]="!isOpen()" [class.translate-y-0]="isOpen()">
+
+    <div class="w-full flex justify-center pt-4 pb-2" (click)="closeSheet()">
+        <div class="w-12 h-1.5 bg-gray-700 rounded-full cursor-pointer"></div>
+    </div>
+
+    <div class="px-6 pb-10 pt-2 space-y-6">
+        <h2 class="text-xl font-bold text-center text-white">{{ ui.title }}</h2>
+
+        <form (submit)="handleSubmit($event)" class="space-y-5">
+
+            <div class="space-y-1 relative">
+                <label class="text-xs text-gray-400 ml-1">{{ ui.amountLabel }}</label>
+                <input type="number" step="0.01" [placeholder]="ui.amountPlaceholder"
+                    [formField]="transactionForm.amount"
+                    class="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-2xl font-bold text-white placeholder-gray-700 focus:outline-none focus:border-[#a3ff33] transition-colors">
+                <app-form-field-error [form]="transactionForm" field="amount" />
+            </div>
+
+            <div class="space-y-1 relative">
+                <label class="text-xs text-gray-400 ml-1">{{ ui.conceptLabel }}</label>
+                <input type="text" [placeholder]="ui.conceptPlaceholder" [formField]="transactionForm.concept"
+                    class="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-700 focus:outline-none focus:border-[#a3ff33] transition-colors">
+                <app-form-field-error [form]="transactionForm" field="concept" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <div class="space-y-1 relative">
+                    <label class="text-xs text-gray-400 ml-1">{{ ui.categoryLabel }}</label>
+                    <select [formField]="transactionForm.category"
+                        class="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#a3ff33] transition-colors appearance-none">
+                        @for (cat of categories(); track cat.id) {
+                        <option [value]="cat.id">{{ cat.label }}</option>
+                        }
+                    </select>
+                    <app-form-field-error [form]="transactionForm" field="category" />
+                </div>
+
+                <div class="space-y-1 relative">
+                    <label class="text-xs text-gray-400 ml-1">{{ ui.dateLabel }}</label>
+                    <input type="date" [formField]="transactionForm.date" style="color-scheme: dark;" lang="es-PE"
+                        class="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#a3ff33] transition-colors">
+                    <app-form-field-error [form]="transactionForm" field="date" />
+                </div>
+
+            </div>
+
+            <button type="submit" [disabled]="transactionForm().invalid()"
+                class="w-full bg-[#a3ff33] text-black font-bold py-4 rounded-xl mt-4 hover:bg-opacity-90 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                {{ ui.submitBtn }}
+            </button>
+        </form>
+    </div>
+</div>

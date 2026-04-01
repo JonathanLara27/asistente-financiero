@@ -1,0 +1,32 @@
+<section
+    class="bg-gradient-to-br from-[#121212] to-[#0a0a0a] p-6 rounded-[32px] border border-white/5 relative overflow-hidden shadow-2xl">
+    <div class="relative z-10 space-y-4">
+        <div class="flex items-center justify-between">
+            <span class="text-xs text-gray-400 flex items-center gap-1">{{ label() }}</span>
+
+            @if (growth()) {
+            <span class="text-[10px] font-bold text-[#a3ff33] bg-[#a3ff33]/10 px-2 py-0.5 rounded-full">
+                {{ growth() }}
+            </span>
+            }
+        </div>
+
+        <h3 class="text-3xl sm:text-4xl font-bold tracking-tight break-words">
+            {{ balance() | currency:'PEN':'symbol':'1.2-2' }}
+        </h3>
+
+        <div class="pt-2">
+            <button
+                class="w-full bg-[#a3ff33] text-black font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 text-sm hover:bg-opacity-90 hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_15px_rgba(163,255,51,0.2)]">
+                <div class="w-4 h-4 bg-black"
+                    style="-webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;"
+                    [style.-webkit-mask-image]="'url(' + incomeIcon() + ')'"
+                    [style.mask-image]="'url(' + incomeIcon() + ')'">
+                </div>
+                {{ depositLabel() }}
+            </button>
+        </div>
+    </div>
+    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-[#a3ff33]/5 blur-3xl rounded-full pointer-events-none">
+    </div>
+</section>

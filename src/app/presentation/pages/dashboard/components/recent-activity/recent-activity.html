@@ -1,0 +1,47 @@
+<section class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold">{{ title() }}</h2>
+        <button class="text-xs font-bold text-[#a3ff33]">{{ viewAllLabel() }}</button>
+    </div>
+
+    <div class="space-y-3">
+        @for (tx of transactions() | slice:0:limit(); track tx.id) {
+
+        <div
+            class="bg-[#121212] p-4 rounded-2xl border border-white/5 flex items-center justify-between group hover:bg-[#1a1a1a] transition-colors cursor-pointer">
+            <div class="flex items-center gap-4">
+
+                <div [ngClass]="tx.type === 'income' ? 'bg-green-500/10 text-green-500' : 'bg-[#1a1a1a] text-gray-400'"
+                    class="w-10 h-10 rounded-full flex items-center justify-center border border-white/5">
+
+                    <div class="w-5 h-5 bg-current"
+                        style="-webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;"
+                        [style.-webkit-mask-image]="'url(' + (tx.type === 'income' ? iconsActivity().income : iconsActivity().expense) + ')'"
+                        [style.mask-image]="'url(' + (tx.type === 'income' ? iconsActivity().income : iconsActivity().expense) + ')'">
+                    </div>
+                </div>
+
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold truncate">{{ tx.concept }}</h3>
+                    <div class="flex items-center gap-2 text-[10px] text-gray-500 overflow-hidden">
+                        <span>{{ tx.date }}</span>
+                        <span class="w-1 h-1 bg-gray-700 rounded-full shrink-0"></span>
+                        <span class="truncate">{{ tx.category }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span [ngClass]="tx.type === 'income' ? 'text-green-500' : 'text-white'" class="font-bold text-sm">
+                    {{ tx.type === 'income' ? '+' : '-' }} {{ tx.amount | currency:'PEN':'symbol':'1.2-2' }}
+                </span>
+            </div>
+        </div>
+
+        } @empty {
+        <div class="text-center py-8 bg-[#121212] rounded-2xl border border-dashed border-white/10">
+            <p class="text-gray-500 text-sm">{{ emptyMessage() }}</p>
+        </div>
+        }
+    </div>
+</section>

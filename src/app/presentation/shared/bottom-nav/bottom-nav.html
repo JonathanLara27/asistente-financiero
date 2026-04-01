@@ -1,0 +1,40 @@
+<nav class="fixed bottom-0 left-0 right-0 bg-[#0a0a0a] border-t border-white/5 pb-6 pt-2 px-6 z-50">
+    <div class="flex justify-between items-end w-full max-w-7xl mx-auto">
+
+        @for (item of tabs(); track item.id) {
+
+        @if (item.isFab) {
+        <div class="relative -top-4">
+            <button (click)="addClick.emit()"
+                class="w-14 h-14 bg-[#a3ff33] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(163,255,51,0.3)] hover:scale-105 active:scale-95 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                </svg>
+            </button>
+        </div>
+        } @else {
+        <a [routerLink]="item.route" routerLinkActive="is-active" #rla="routerLinkActive"
+            class="flex flex-col items-center gap-1 min-w-[64px] transition-colors duration-300">
+
+            <div class="w-6 h-6 transition-colors duration-300" [class.bg-[#a3ff33]]="rla.isActive"
+                [class.bg-gray-500]="!rla.isActive" [style.-webkit-mask-image]="'url(' + item.iconPath + ')'"
+                [style.mask-image]="'url(' + item.iconPath + ')'"
+                style="-webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;">
+            </div>
+
+            <span class="text-[10px] font-medium transition-colors duration-300" [class.text-[#a3ff33]]="rla.isActive"
+                [class.text-gray-500]="!rla.isActive">
+                {{ item.label }}
+            </span>
+
+            <div class="w-1 h-1 rounded-full mt-0.5 transition-all duration-300" [class.bg-[#a3ff33]]="rla.isActive"
+                [class.opacity-100]="rla.isActive" [class.opacity-0]="!rla.isActive">
+            </div>
+        </a>
+        }
+
+        }
+    </div>
+</nav>
